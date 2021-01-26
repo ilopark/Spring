@@ -50,6 +50,7 @@ public class MemberController {
 	@RequestMapping("/member/delete.do")
 	public ModelAndView delete(@RequestParam int num,
 			ModelAndView mView) {
+		
 		service.deleteMember(num);
 		//목록보리고 리다이렉트 이동 시 
 	   mView.setViewName("redirect:/member/list.do");
