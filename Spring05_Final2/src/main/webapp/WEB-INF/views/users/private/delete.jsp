@@ -11,7 +11,7 @@
 	<h1>알림</h1>
 	<p>
 		<strong></strong> 님 탈퇴 처리 되었습니다.
-		<a href="${pageContext.request.contextPath }/">인덱스로 가기</a>
+		<a href="${pageContext.request.contextPath }/">홈으로 가기</a>
 	</p>
 </div>	
 </body>
