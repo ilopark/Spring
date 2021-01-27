@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,14 @@ public class UsersController {
 	@Autowired
 	private UsersService service;
 	
+	//로그아웃 요청 처리
+	@RequestMapping("/users/logout")
+	public String logout(HttpSession session) {
+		//	session.invalidate(); => 세션 초기화
+		session.removeAttribute("id"); // 세션에서 id 삭제
+		
+		return "users/logout";
+	}
 	@RequestMapping(value = "/users/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request,
 			HttpServletResponse response) {
