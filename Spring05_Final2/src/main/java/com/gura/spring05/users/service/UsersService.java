@@ -23,6 +23,8 @@ public interface UsersService {
 	public void getInfo(ModelAndView mView, HttpSession session);
 	//개인정보를 삭제처리 하는 메소드
 	public void deleteUser(HttpSession session);
+	//비밀번호 수정 처리를 하고 성붕여부를 ModelAndView 객체에다 담아주는 메소드
+	public void updateUserPwd(ModelAndView mView, UsersDto dto, HttpSession session);
 }
 
 

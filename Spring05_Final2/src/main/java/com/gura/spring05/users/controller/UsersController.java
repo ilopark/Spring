@@ -24,6 +24,20 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService service;
+	//비밀번호 수정 요청 처리
+	@RequestMapping("/users/private/pwd_update")
+	public ModelAndView pwd_update(UsersDto dto, ModelAndView mView, HttpSession session) {
+		//UsersDto 에는 폼 전송된 아이디, 이전 비밀번호, 새 비밀번호가 담겨 있다.
+		service.updateUserPwd(mView, dto, session);
+		mView.setViewName("users/private/pwd_update");
+		return mView;
+	}
+	//비밀번호 수정 폼 요청처리
+	@RequestMapping("/users/private/pwd_updateform")
+	public String pwd_updateform() {
+		return "users/private/pwd_updateform";
+	}
+	
 	//회원 탈퇴 요청 처리
 	@RequestMapping("/users/private/delete")
 	public String delete(HttpSession session) {
