@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +12,14 @@
 <jsp:include page="include/navbar.jsp"></jsp:include>
 <div class="container">
 	<h1>인덱스 페이지 입니다.</h1>
-	<ul>
-		<li><a href="users/signup_form.do">회원가입</a></li>
-	</ul>
+	<c:choose>
+		<c:when test="${empty dto.id }">
+			<ul>
+				<li><a href="users/signup_form.do">회원가입</a></li>
+			</ul>
+		</c:when>
+	</c:choose>
+	
 </div>
 </body>
 </html>
