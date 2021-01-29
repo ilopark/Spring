@@ -16,6 +16,7 @@
 		<c:when test="${empty dto.id }">
 			<ul>
 				<li><a href="users/signup_form.do">회원가입</a></li>
+				<li><a href="cafe/list.do">글목록 보기</a></li>
 				<li><a href="cafe/private/insertform.do">카페 글쓰러 가기</a></li>
 			</ul>
 		</c:when>

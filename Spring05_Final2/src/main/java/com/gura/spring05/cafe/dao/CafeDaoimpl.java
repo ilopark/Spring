@@ -7,15 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.gura.spring05.cafe.dto.CafeDto;
+import com.gura.spring05.exception.DBFailException;
 
 @Repository
-public class CafeDaoimpl implements CafeDao {
+public class CafeDaoimpl implements CafeDao{
+	//핵심 의존객체 DI
 	@Autowired
-	SqlSession session;
+	private SqlSession session;
 	
 	@Override
 	public void insert(CafeDto dto) {
-		session.insert("cefe.insert", dto);
+		session.insert("cafe.insert", dto);
 	}
 
 	@Override
@@ -25,7 +27,10 @@ public class CafeDaoimpl implements CafeDao {
 
 	@Override
 	public void delete(int num) {
-		session.delete("cafe.delete", num);
+		int count= session.delete("cafe.delete", num);
+		if(count==0) {//0이면 삭제 실패다.
+			throw new DBFailException(num+" 번 글을 삭제 할 수 없습니다.");
+		}
 	}
 
 	@Override
@@ -35,27 +40,38 @@ public class CafeDaoimpl implements CafeDao {
 	}
 
 	@Override
-	public List<CafeDto> getList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<CafeDto> getList(CafeDto dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		/*
+		 *  parameterType => CafeDto
+		 *  
+		 *  parameterType  에는 페이징 처리를 위한 startRowNum 과 endRowNum 이 들어 있고
+		 *  
+		 *  title  검색이면 title  필드에 검색 키워드가 들어있다.
+		 *  writer 검색이면 writer 필드에 검색 키워드가 들어있다.
+		 *  title+content 검색이면 title and content 필드에 검색 키워드가 들어 있다.
+		 *  검색 키워드가 없으면 title,writer,content 필드는 모두 null 이다.
+		 *  
+		 *  resultType => CafeDto 
+		 */
+		List<CafeDto> list=session.selectList("cafe.getList", dto);
+		return list;
 	}
 
 	@Override
 	public int getCount(CafeDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		/*
+		 *  parameterType => CafeDto
+		 *  parameterType  에는 검색키워드가 존재한다면 들어 있다.
+		 *  
+		 *  resultType => int
+		 */
+		int count=session.selectOne("cafe.getCount", dto);
+		return count;
+	}
+
+	@Override
+	public void addViewCount(int num) {
+		session.update("cafe.addViewCount", num);
 	}
 
 }
