@@ -1,7 +1,6 @@
 package com.gura.spring05.cafe.service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,4 +20,7 @@ public interface CafeService {
 	public void deleteContent(int num);
 	//댓글을 저장하는 메소드
 	public void saveComment(HttpServletRequest request);
+	public void deleteComment(HttpServletRequest request);//댓글 삭제
+	public void updateComment(CafeCommentDto dto);//댓글 수정
+	public void moreCommentList(HttpServletRequest request);//댓글 추가 응답
 }
