@@ -19,9 +19,21 @@ public class GalleryController {
 	@RequestMapping("/gallery/list")
 	public ModelAndView list(ModelAndView mView, HttpServletRequest request) {
 		service.getList(mView, request);
-		
 		mView.setViewName("gallery/list");
 		return mView;
 	}
-	
+	@RequestMapping("/gallery/ajax_page")
+	public ModelAndView ajaxPage(ModelAndView mView, HttpServletRequest request) {
+		service.getList(mView, request);
+		mView.setViewName("gallery/ajax_page");
+		return mView;
+	}
+	@RequestMapping("/gallery/private/upload_form")
+	public String uploadForm() {
+		return "gallery/private/upload_form";
+	}
+	@RequestMapping("/gallery/private/upload")
+	public ModelAndView upload(ModelAndView mView) {
+		return mView;
+	}
 }

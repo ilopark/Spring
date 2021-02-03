@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 	<h1>이미지 업로드 폼</h1>
-	<form action="upload.jsp" method="post" enctype="multipart/form-data">
+	<form action="upload.do" method="post" enctype="multipart/form-data">
 		<div>
 			<label for="caption">설명</label>
 			<input type="text" name="caption" id="caption"/>

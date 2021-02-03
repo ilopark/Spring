@@ -12,21 +12,22 @@ public class GalleryDto {
 	private int endRowNum;
 	private int prevNum; //이전글의 글번호
 	private int nextNum; //다음글의 글번호
-	
+	private MultipartFile image;
 	//디폴트 생성자 
 	public GalleryDto() {}
 	public GalleryDto(int num, String writer, String caption, String imagePath, String regdate, int startRowNum,
-			int endRowNum, int prevNum, int nextNum) {
+			int endRowNum, int prevNum, int nextNum, MultipartFile image) {
 		super();
-		this.num = num;
-		this.writer = writer;
-		this.caption = caption;
-		this.imagePath = imagePath;
-		this.regdate = regdate;
-		this.startRowNum = startRowNum;
-		this.endRowNum = endRowNum;
-		this.prevNum = prevNum;
-		this.nextNum = nextNum;
+		this.num=num;
+		this.writer=writer;
+		this.caption=caption;
+		this.imagePath=imagePath;
+		this.regdate=regdate;
+		this.startRowNum=startRowNum;
+		this.endRowNum=endRowNum;
+		this.prevNum=prevNum;
+		this.nextNum=nextNum;
+		this.image=image;
 	}
 	public int getNum() {
 		return num;
@@ -82,4 +83,11 @@ public class GalleryDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
+	public MultipartFile getImage() {
+		return image;
+	}
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+	
 }
