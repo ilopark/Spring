@@ -19,8 +19,16 @@
 				<li><a href="cafe/list.do">글목록 보기</a></li>
 				<li><a href="cafe/private/insertform.do">카페 글쓰러 가기</a></li>
 				<li><a href="file/list.do">자료실 목록보기</a></li>
+				<li><a href="gallery/list.do">갤러리 목록보기</a></li>
 			</ul>
 		</c:when>
+		<c:otherwise>
+			<ul>
+				<li><a href="cafe/list.do">글목록 보기</a></li>
+				<li><a href="cafe/private/insertform.do">카페 글쓰러 가기</a></li>
+				<li><a href="file/list.do">자료실 목록보기</a></li>
+			</ul>
+		</c:otherwise>
 	</c:choose>
 	
 </div>
