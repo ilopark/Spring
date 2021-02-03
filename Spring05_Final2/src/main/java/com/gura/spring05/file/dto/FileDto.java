@@ -15,7 +15,7 @@ public class FileDto {
 	private int endRowNum;
 	//업로드되는 파일의 정보를 담을 필드 
 	private MultipartFile myFile;
-	
+
 	public FileDto() {}
 
 	public FileDto(int num, String writer, String title, String orgFileName, String saveFileName, long fileSize,
@@ -112,4 +112,6 @@ public class FileDto {
 	public void setMyFile(MultipartFile myFile) {
 		this.myFile = myFile;
 	}
+
+
 }

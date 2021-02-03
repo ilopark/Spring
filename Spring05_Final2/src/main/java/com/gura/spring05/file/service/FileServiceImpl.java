@@ -7,24 +7,25 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.gura.spring05.file.dao.FileDao;
 import com.gura.spring05.file.dto.FileDto;
 
-public class FileServiceImpl implements FileService {
+@Service
+public class FileServiceImpl implements FileService{
 	@Autowired
 	private FileDao fileDao;
-	
+
 	//한 페이지에 나타낼 row 의 갯수
 	final int PAGE_ROW_COUNT=5;
 	//하단 디스플레이 페이지 갯수
 	final int PAGE_DISPLAY_COUNT=5;
-	
+
 	@Override
 	public void getList(HttpServletRequest request) {
-		
+
 		//보여줄 페이지의 번호
 		int pageNum=1;
 		//보여줄 페이지의 번호가 파라미터로 전달되는지 읽어와 본다.	
@@ -48,12 +49,12 @@ public class FileServiceImpl implements FileService {
 		}
 		//인코딩된 키워드를 미리 만들어 둔다. 
 		String encodedK=URLEncoder.encode(keyword);
-		
+
 		//검색 키워드와 startRowNum, endRowNum 을 담을 FileDto 객체 생성
 		FileDto dto=new FileDto();
 		dto.setStartRowNum(startRowNum);
 		dto.setEndRowNum(endRowNum);
-		
+
 		if(!keyword.equals("")){ //만일 키워드가 넘어온다면 
 			if(condition.equals("title_filename")){
 				//검색 키워드를 FileDto 객체의 필드에 담는다. 
@@ -69,7 +70,7 @@ public class FileServiceImpl implements FileService {
 		List<FileDto> list=fileDao.getList(dto);
 		//전체 row 의 갯수 
 		int totalRow=fileDao.getCount(dto);
-		
+
 		//전체 페이지의 갯수 구하기
 		int totalPageCount=
 				(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
@@ -82,7 +83,7 @@ public class FileServiceImpl implements FileService {
 		if(totalPageCount < endPageNum){
 			endPageNum=totalPageCount; //보정해준다. 
 		}
-		
+
 		//EL 에서 사용할 값을 미리 request 에 담아두기
 		request.setAttribute("list", list);
 		request.setAttribute("startPageNum", startPageNum);
@@ -103,7 +104,7 @@ public class FileServiceImpl implements FileService {
 		String orgFileName=myFile.getOriginalFilename();
 		//파일의 크기
 		long fileSize=myFile.getSize();
-		
+
 		// webapp/upload 폴더 까지의 실제 경로(서버의 파일시스템 상에서의 경로)
 		String realPath=request.getServletContext().getRealPath("/upload");
 		//저장할 파일의 상세 경로
@@ -155,4 +156,5 @@ public class FileServiceImpl implements FileService {
 		//DB 에서 파일 정보 삭제 
 		fileDao.delete(num);
 	}
+
 }

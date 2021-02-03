@@ -3,6 +3,7 @@ package com.gura.spring05.file.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,10 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gura.spring05.file.dto.FileDto;
 import com.gura.spring05.file.service.FileService;
 
+@Controller
 public class FileController {
 	@Autowired
 	private FileService fileService;
-	
+
 	//파일 목록 보기 요청 처리 
 	@RequestMapping("/file/list")
 	public ModelAndView list(HttpServletRequest request,
@@ -25,10 +27,10 @@ public class FileController {
 		mView.setViewName("file/list");
 		return mView;
 	}
-	
+
 	@RequestMapping("/file/private/upload_form")
 	public ModelAndView uploadForm(ModelAndView mView) {
-		
+
 		mView.setViewName("file/private/upload_form");
 		return mView;
 	}
@@ -41,7 +43,7 @@ public class FileController {
 		mView.setViewName("file/private/upload");
 		return mView;
 	}
-	
+
 	//파일 다운로드 요청 처리
 	@RequestMapping("/file/download")
 	public ModelAndView download(@RequestParam int num,

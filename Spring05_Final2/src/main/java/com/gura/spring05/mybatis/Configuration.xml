@@ -10,8 +10,8 @@
 		<typeAlias type="com.gura.spring05.cafe.dto.CafeDto"
 			alias="cafeDto"/>
 		<typeAlias type="com.gura.spring05.cafe.dto.CafeCommentDto"
-			alias="cafeCommentDto"/>	
-			<typeAlias type="com.gura.spring05.file.dto.FileDto"
+			alias="cafeCommentDto"/>
+		<typeAlias type="com.gura.spring05.file.dto.FileDto"
 			alias="fileDto"/>
 	</typeAliases>
 	

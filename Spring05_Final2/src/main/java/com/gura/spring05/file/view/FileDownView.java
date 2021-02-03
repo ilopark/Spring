@@ -23,7 +23,7 @@ import com.gura.spring05.file.dto.FileDto;
  */
 @Component("fileDownView")
 public class FileDownView extends AbstractView{
-	
+
 	//이 메소드에서 클라이언트에게 응답하면 된다. 
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
@@ -34,15 +34,15 @@ public class FileDownView extends AbstractView{
 	 	//다운로드 시켜주기 ... 
 		String orgFileName=dto.getOrgFileName(); //원본 파일명
 		String saveFileName=dto.getSaveFileName(); //저장된 파일명
-		
+
 		//다운로드 시켜줄 파일의 실제 경로 구성하기
 		String path=request.getServletContext().getRealPath("/upload")
 				+File.separator+saveFileName;
-		
+
 		//System.out.println(path);
 		//다운로드 할 파일을 읽어올 스트림 객체 생성하기
 		FileInputStream fis=new FileInputStream(path);
-		
+
 		//다운로드 시켜주는 작업을 한다. (실제 파일 데이터와 원본파일명을 보내줘야한다.)
 		//다운로드 시켜주는 작업을 한다. 
 		String encodedName=null;
@@ -57,14 +57,14 @@ public class FileDownView extends AbstractView{
 			//파일명에 공백이있는 경우 처리 
 			encodedName=encodedName.replaceAll("\\+"," ");
 		}
-		
+
 		//응답 헤더 정보 설정
 		response.setHeader("Content-Disposition","attachment;filename="+encodedName);
 		response.setHeader("Content-Transfer-Encoding", "binary");
-		
+
 		//다운로드할 파일의 크기 읽어와서 다운로드할 파일의 크기 설정
 		response.setContentLengthLong(dto.getFileSize());
-		
+
 		//클라이언트에게 출력할수 있는 스트림 객체 얻어오기
 		BufferedOutputStream bos=
 			new BufferedOutputStream(response.getOutputStream());
