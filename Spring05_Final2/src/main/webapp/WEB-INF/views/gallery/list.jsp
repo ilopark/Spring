@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 	- 반드시 jquery.js 가 먼저 로딩이 되어 있어야지만 동작한다.
 	- 사용법은 이미지의 부모 div 크기를 결정하고 이미지를 선택해서  .imgLiquid() 동작을 하면된다.
  -->
-<script src="${pageContext.request.contextPath }/resouces/js/imgLiquid.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/imgLiquid.js"></script>
 <style>
 	/* card 이미지 부모요소의 높이 지정 */
 	.img-wrapper{
@@ -73,31 +73,25 @@
 	<jsp:param value="gallery" name="thisPage"/>
 </jsp:include>
 <div class="container">
-	<a href="private/upload_form.jsp">사진 업로드 하러 가기</a><br/>
+	<a href="private/upload_form.do">사진 업로드 하러 가기</a><br/>
 	<a href="private/ajax_form.do">사진 업로드 하러 가기2</a>
 	<h1>겔러리 목록 입니다.</h1>
 	<div class="row" id="galleryList">
 		<c:forEach var="tmp" items="${list }">
-			<!-- 
-			[ 칼럼의 폭을 반응형으로 ]
-			device 폭 768px 미만에서  칼럼의 폭 => 6/12 (50%)
-			device 폭 768px ~ 992px 에서  칼럼의 폭 => 4/12 (33.333%)
-			device 폭 992  이상에서  칼럼의 폭 => 3/12 (25%)
-		 -->
-		<div class="col-6 col-md-4 col-lg-3">
-			<div class="card mb-3">
-				<a href="detail.do?num=${tmp.num}">
-					<div class="img-wrapper">
-						<img class="card-img-top" src="${pageContext.request.contextPath }${tmp.imagePath }" />
+			<div class="col-6 col-md-4 col-lg-3">
+				<div class="card mb-3">
+					<a href="detail.do?num=${tmp.num }">
+						<div class="img-wrapper">
+							<img class="card-img-top" src="${pageContext.request.contextPath }${tmp.imagePath}" />
+						</div>
+					</a>
+					<div class="card-body">
+						<p class="card-text">${tmp.caption }</p>
+						<p class="card-text">by <strong>${tmp.writer }</strong></p>
+						<p><small>${tmp.regdate }</small></p>
 					</div>
-				</a>
-				<div class="card-body">
-					<p class="card-text">${tmp.caption}</p>
-					<p class="card-text">by <strong>${tmp.writer}</strong></p>
-					<p><small>${tmp.regdate }</small></p>
 				</div>
-			</div>
-		</div>
+			</div>		
 		</c:forEach>
 	</div>
 </div>
@@ -126,9 +120,9 @@
 		//바닥까지 스크롤 되었는지 여부를 알아낸다. 
 		let isBottom = scrollTop+windowHeight + 10 >= documentHeight;
 		if(isBottom){
-			console.log("마지막 페이지 입니다.");
+			console.log("오매~ 바닥이네?");
 			//만일 현재 마지막 페이지라면
-			if(currentPage == ${totalPageCount } || isLoading){
+			if(currentPage == ${totalPageCount} || isLoading){
 				return; //함수를 여기서 끝낸다. 
 			}
 			//현재 로딩 중이라고 표시한다. 
@@ -160,8 +154,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
