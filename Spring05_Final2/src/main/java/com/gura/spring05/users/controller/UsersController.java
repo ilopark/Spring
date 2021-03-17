@@ -26,14 +26,35 @@ import com.gura.spring05.users.service.UsersService;
 
 @Controller
 public class UsersController {
-	
 	@Autowired
 	private UsersService service;
+
+	@RequestMapping("/users/testlogout")
+	public String testLogout(HttpSession session) {
+		session.removeAttribute("id");
+		session.removeAttribute("userGrade");
+		return "users/testlogout";
+	}
+	
+	@RequestMapping("/users/manager/users_list")
+	public ModelAndView usersList(ModelAndView mView, HttpServletRequest request) {
+		service.usersList(mView, request);
+		mView.setViewName("users/manager/users_list");
+		return mView;
+	}
+
+	@RequestMapping("/users/manager/users_manage")
+	public ModelAndView usersManage(ModelAndView mView, HttpServletRequest request) {
+		service.updateGrade(mView, request);
+		mView.setViewName("users/manager/users_manage");
+		return mView;
+	}
+	
 	
 	@RequestMapping(value="/users/private/update.do", method=RequestMethod.POST)
 	public ModelAndView update(ModelAndView mView, UsersDto dto, HttpSession session) {
 		service.updateUser(dto, session);
-		mView.setViewName("users/private/update.do");
+		mView.setViewName("users/private/update");
 		return mView;
 	}
 	//개인정보 수정폼 요청 처리
@@ -142,4 +163,39 @@ public class UsersController {
 		map.put("isExist", isExist);
 		return map;
 	}
+	
+	@RequestMapping("/users/findid_form")
+	public ModelAndView findid_form(ModelAndView mView) {
+		mView.setViewName("users/findid_form");
+		return mView;
+	}
+	@RequestMapping("/users/findid")
+	public ModelAndView findid(ModelAndView mView, HttpServletRequest request) {
+		service.findid(request, mView);
+		mView.setViewName("users/findid");
+		return mView;
+	}
+	
+	@RequestMapping("/users/findpwd")
+	public ModelAndView findpwd(ModelAndView mView, UsersDto dto, HttpServletRequest request) {
+		service.findpwd(mView, dto, request);
+		mView.setViewName("users/findpwd");
+		return mView;
+	}
+	
+	//비밀번호 수정 폼 요청처리
+	@RequestMapping("/users/findpwdform")
+	public String findpwdform() {
+		return "users/findpwdform";
+	}
+	//비밀번호 수정 폼 요청처리
+	@RequestMapping("/users/findpwdform2")
+	public ModelAndView findpwd_form2(@RequestParam String id, ModelAndView mView) {
+      mView.addObject("id",id);
+      mView.setViewName("users/findpwdform2");
+      return mView;
+	}
+
+		
+		
 }

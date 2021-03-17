@@ -1,5 +1,7 @@
 package com.gura.spring05.users.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -106,6 +108,51 @@ public class UsersDaoImpl implements UsersDao{
 		return pwd;
 	}
 
+	@Override
+	public UsersDto findid(UsersDto dto) {
+		//이메일을 이용해서 저장된 비밀번호를 SELECT 해서
+		UsersDto dto2=session.selectOne("users.findid", dto);
+		return dto2;
+	}
+
+	
+	@Override
+	public int findpwd(UsersDto dto) {
+		/*
+		 *  mapper namespace => users
+		 *  sql id => updatePwd
+		 *  parameterType => UsersDto
+		 */
+		int dto2=session.update("users.findpwd", dto);
+		return dto2;
+	}
+	
+	
+	@Override
+	public int updateGrade(UsersDto dto) {
+		int isSuccess=session.update("users.updateGrade",dto);
+		return isSuccess;
+	}
+	@Override
+	public List<UsersDto> getList(UsersDto dto) {
+		List<UsersDto> list=session.selectList("users.getList", dto);
+		return list;
+	}
+	@Override
+	public int getCount(UsersDto dto) {
+		int count=session.selectOne("users.getCount", dto);
+		return count;
+	}
+	@Override
+	public String getGrade(String id) {
+		String grade=session.selectOne("users.getGrade",id);
+		return grade;
+	}
+	
+	
+	
+	
+	
 }
 
 

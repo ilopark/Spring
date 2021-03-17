@@ -20,7 +20,6 @@ public class LoginFilter implements Filter{
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		
 	}
 	//필터가 동작되면 호출되는 메소드 
@@ -70,7 +69,6 @@ public class LoginFilter implements Filter{
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
 		
 	}
 

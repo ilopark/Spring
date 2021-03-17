@@ -15,6 +15,8 @@
 	<c:choose>
 		<c:when test="${empty dto.id }">
 			<ul>
+				<li><a href="users/findid_form.do">아이디 찾기</a></li>
+				<li><a href="users/findpwdform.do">비밀번호 찾기</a></li>
 				<li><a href="cafe/list.do">글목록 보기</a></li>
 				<li><a href="cafe/private/insertform.do">카페 글쓰러 가기</a></li>
 				<li><a href="file/list.do">자료실 목록보기</a></li>

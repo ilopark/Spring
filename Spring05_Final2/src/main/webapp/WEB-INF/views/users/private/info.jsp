@@ -57,6 +57,10 @@
 			<th>가입일</th>
 			<td>${dto.regdate }</td>
 		</tr>
+		<<tr>
+			<th>주소</th>
+			<th>${dto.userAddr1 } ${dto.userAddr2 } ${dto.userAddr3 }</th>
+		</tr>
 	</table>
 	<a href="updateform.do">개인 정보 수정</a>
 	<a href="javascript:deleteConfirm()">탈퇴</a>
